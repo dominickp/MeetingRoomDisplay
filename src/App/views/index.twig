@@ -5,10 +5,20 @@
 <h1>Silex Bootstrap</h1>
 <p>You have successfully bootstrapped Silex. Now get to work!</p>
 
+    <p>
+        Time until next event: {{ time_until_next_event }}
+    </p>
+    <p>
+        Event in progress: {{ event_in_progress }}
+    </p>
+
     {#{{ dump(events) }}#}
 
     {% for event in events %}
-        Event: {{ event.getSummary }} - {% if event.getStart %}{{ event.getStart.getDateTime }}{% endif %}
+        Organizer: {{ event.getOrganizer.getDisplayName }} -
+        Event: {{ event.getSummary }} -
+        {% if event.getStart %}{{ event.getStart.getDateTime|date('g:i a') }}{% endif %} -
+        {% if event.getEnd %}{{ event.getEnd.getDateTime|date('g:i a') }}{% endif %}
         <hr>
     {% endfor %}
 
