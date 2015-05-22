@@ -31,14 +31,26 @@ class CalendarController
         $this->config = $config;
     }
 
-    public function indexAction()
+    public function indexAction($room_name)
     {
+        return $this->twig->render('index.twig', array(
+            'room_name' => $room_name
+        ));
+    }
+
+    public function getRoomAction($room_name)
+    {
+        //print_r($room_name); die;
 
         $client = new Google_Client();
         $client->setApplicationName("Meeting_Room_Display");
         $client->setDeveloperKey($this->config['google']['api_key']);
 
-        $calendar_url = 'shawmutdelivers.com_35373038323139323533@resource.calendar.google.com';
+        // Try to find the room
+        $room_display_name = $this->config['rooms'][$room_name]['name'];
+        $calendar_url = $this->config['rooms'][$room_name]['address'];
+
+        //$calendar_url = 'shawmutdelivers.com_35373038323139323533@resource.calendar.google.com';
 
         $midnight_datetime = new \DateTime('tomorrow midnight');
         $midnight =  $midnight_datetime->format(\DateTime::ATOM);
@@ -67,7 +79,13 @@ class CalendarController
             $first_event_start_datetime = new \DateTime($first_event_start);
 
             $interval = $first_event_start_datetime->diff(new \DateTime());
-            $time_until_next_event =  $interval->format("%h hours, %i minutes");
+            //print_r($interval); die;
+            if($interval->h > 0){
+                $time_until_next_event =  $interval->format("%h hours, %i minutes");
+            } else {
+                $time_until_next_event =  $interval->format("%i minutes");
+            }
+
 
             return array(
                 'first_event_start' => $first_event_start,
@@ -92,7 +110,7 @@ class CalendarController
 
         // Determine if an event is in progress or not
         if($next_event['first_event_start'] < $now){
-            $event_in_progress = 'yes';
+            $event_in_progress = 'room-busy';
             // Next event is actually the further one
             if($events[1]) {
                 $next_event = getTimeUntilNextEvent($events[1]);
@@ -100,13 +118,14 @@ class CalendarController
                 $next_event = $no_event;
             }
         } else {
-            $event_in_progress = 'no';
+            $event_in_progress = 'room-free';
         }
 
 
 
-        return $this->twig->render('index.twig', array(
+        return $this->twig->render('room_display.twig', array(
             'events' => $events,
+            'room_display_name' => $room_display_name,
             'time_until_next_event' => $next_event['time_until_next_event'],
             'event_in_progress' => $event_in_progress
         ));

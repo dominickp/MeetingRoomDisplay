@@ -1,0 +1,34 @@
+
+
+    <div class="row meeting-room {{ event_in_progress }}">
+        <div class="col-md-4">
+            <h1 class="room-status">
+                {% if event_in_progress == 'room-busy' %}
+                    BUSY
+                {% elseif event_in_progress == 'room-free' %}
+                    FREE
+                {% endif %}
+            </h1>
+            <p>
+                Next event starts in {{ time_until_next_event }}
+            </p>
+        </div>
+        <div class="col-md-8">
+            <h2>{{ room_display_name }}</h2>
+
+            <div class="list-group">
+                {% for event in events %}
+
+                    <a href="#" class="list-group-item {% if event_in_progress == 'room-busy' and loop.first %}active{% endif %}">
+                            <h4 class="list-group-item-heading">{{ event.getSummary }}</h4>
+                            <p class="list-group-item-text">
+                                {% if event.getStart %}{{ event.getStart.getDateTime|date('g:i a') }}{% endif %} -
+                                {% if event.getEnd %}{{ event.getEnd.getDateTime|date('g:i a') }}{% endif %} -
+                                Organizer: {{ event.getOrganizer.getDisplayName }}
+                            </p>
+                        </a>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>

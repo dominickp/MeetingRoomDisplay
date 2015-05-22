@@ -1,0 +1,16 @@
+body{
+    overflow-x: hidden;
+}
+body, html, .container-fluid{
+    height: 100%;
+}
+.meeting-room{
+    height: 100%;
+    color: white;
+}
+.room-free{
+    background-color:green;
+}
+.room-busy{
+    background-color:red;
+}

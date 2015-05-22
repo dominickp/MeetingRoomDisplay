@@ -2,24 +2,29 @@
 {% block title %}DefaultController::index{% endblock %}
 
 {% block content %}
-<h1>Silex Bootstrap</h1>
-<p>You have successfully bootstrapped Silex. Now get to work!</p>
+    Loading room details...
+{% endblock %}
 
-    <p>
-        Time until next event: {{ time_until_next_event }}
-    </p>
-    <p>
-        Event in progress: {{ event_in_progress }}
-    </p>
+{% block closing_scripts %}
+<script>
+    $( document ).ready(function() {
 
-    {#{{ dump(events) }}#}
 
-    {% for event in events %}
-        Organizer: {{ event.getOrganizer.getDisplayName }} -
-        Event: {{ event.getSummary }} -
-        {% if event.getStart %}{{ event.getStart.getDateTime|date('g:i a') }}{% endif %} -
-        {% if event.getEnd %}{{ event.getEnd.getDateTime|date('g:i a') }}{% endif %}
-        <hr>
-    {% endfor %}
+        var ajax_call = function() {
+            $.get( "get-room/{{ room_name }}")
+                .done(function( data ) {
+                    //alert( "Data Loaded: " + data );
+                        $("#ajax-target").html(data);
+                });
+        };
+
+        var interval = 1000 * 60 * 1; // where X is your every X minutes
+
+        setInterval(ajax_call, interval);
+
+        ajax_call();
+    });
+</script>
+
 
 {% endblock %}

@@ -8,5 +8,5 @@
  * @link http://silex.sensiolabs.org/doc/providers/service_controller.html
  */
 
-$app->get('/', 'app.default_controller:indexAction');
-$app->get('/test', 'app.calendar_controller:indexAction');
+$app->get('/{room_name}', 'app.calendar_controller:indexAction');
+$app->get('/get-room/{room_name}', 'app.calendar_controller:getRoomAction');
