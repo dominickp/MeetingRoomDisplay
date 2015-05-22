@@ -20,8 +20,16 @@ if (file_exists(__DIR__ . '/config.php')) {
     include __DIR__ . '/config.php';
 }
 
+
 // Initialize Application
 $app = new App\Silex\Application($config);
+
+
+// Use Yaml
+$app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/config/parameters.yml'));
+$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
+    'params.google' => $app['config']['google']
+));
 
 /**
  * Register controllers as services
@@ -29,7 +37,12 @@ $app = new App\Silex\Application($config);
  **/
 $app['app.default_controller'] = $app->share(
     function () use ($app) {
-        return new \App\Controller\DefaultController($app['twig'], $app['logger']);
+        return new \App\Controller\DefaultController($app['twig'], $app['logger'], $app['config']);
+    }
+);
+$app['app.calendar_controller'] = $app->share(
+    function () use ($app) {
+        return new \App\Controller\CalendarController($app['twig'], $app['logger'], $app['config']);
     }
 );
 

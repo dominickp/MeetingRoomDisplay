@@ -9,3 +9,4 @@
  */
 
 $app->get('/', 'app.default_controller:indexAction');
+$app->get('/test', 'app.calendar_controller:indexAction');

@@ -1,4 +1,5 @@
 app/config.php
+app/config/
 
 app/cache
 app/log
