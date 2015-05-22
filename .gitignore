@@ -1,5 +1,6 @@
 app/config.php
 app/config/
+app/config/parameters.yml
 
 app/cache
 app/log
