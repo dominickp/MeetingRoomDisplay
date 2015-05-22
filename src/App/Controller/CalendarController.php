@@ -86,11 +86,26 @@ class CalendarController
                 $time_until_next_event =  $interval->format("%i minutes");
             }
 
-
             return array(
                 'first_event_start' => $first_event_start,
                 'time_until_next_event' => $time_until_next_event
             );
+        }
+
+        function getTimeUntilCurrentEventComplete($event)
+        {
+            $current_event_end = $event->getEnd()->getDateTime();
+            $current_event_end_datetime = new \DateTime($current_event_end);
+
+            $interval = $current_event_end_datetime->diff(new \DateTime());
+
+            if($interval->h > 0){
+                $time_remaining =  $interval->format("%h hours, %i minutes");
+            } else {
+                $time_remaining =  $interval->format("%i minutes");
+            }
+
+            return $time_remaining;
         }
 
         $no_event = array(
@@ -99,24 +114,27 @@ class CalendarController
         );
 
         // Get first event, may be in progress
-        if($events[0]){
+        if(isset($events[0])){
             $next_event = getTimeUntilNextEvent($events[0]);
         } else {
             $next_event = $no_event;
         }
 
 
+        $time_remaining = null;
 
 
         // Determine if an event is in progress or not
-        if($next_event['first_event_start'] < $now){
+        if($next_event['first_event_start'] < $now && $next_event['first_event_start'] != null){
             $event_in_progress = 'room-busy';
             // Next event is actually the further one
-            if($events[1]) {
+            if(isset($events[1])) {
                 $next_event = getTimeUntilNextEvent($events[1]);
             } else {
                 $next_event = $no_event;
             }
+            // Find time remaining
+            if(isset($events[0])) $time_remaining = getTimeUntilCurrentEventComplete($events[0]);
         } else {
             $event_in_progress = 'room-free';
         }
@@ -127,7 +145,8 @@ class CalendarController
             'events' => $events,
             'room_display_name' => $room_display_name,
             'time_until_next_event' => $next_event['time_until_next_event'],
-            'event_in_progress' => $event_in_progress
+            'event_in_progress' => $event_in_progress,
+            'time_remaining' => $time_remaining
         ));
     }
 }

@@ -1,16 +1,36 @@
 body{
     overflow-x: hidden;
+    background:url('../img/grey_wash_wall.png');
 }
 body, html, .container-fluid{
     height: 100%;
+    font-size: 20px;
 }
 .meeting-room{
     height: 100%;
     color: white;
 }
-.room-free{
-    background-color:green;
+.room-free .left-panel{
+    background-color:rgba(49, 201, 104, 0.5);
 }
-.room-busy{
-    background-color:red;
+.room-busy .left-panel{
+    background:rgba(215, 40, 40, 0.5);
+}
+h1{
+    font-size:70px;
+}
+h1.room-status{
+    font-size:110px;
+}
+.right-panel{
+    height: 100%;
+}
+.left-panel{
+    height: 100%;
+}
+.meeting-room .list-group-item{
+    font-size:30px;
+}
+.meeting-room .list-group-item-heading{
+    font-size:30px;
 }

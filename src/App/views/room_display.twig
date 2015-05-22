@@ -1,21 +1,29 @@
 
 
     <div class="row meeting-room {{ event_in_progress }}">
-        <div class="col-md-4">
-            <h1 class="room-status">
+        <div class="col-sm-4 left-panel text-center">
+            <h1 class="room-status text-center">
                 {% if event_in_progress == 'room-busy' %}
                     BUSY
                 {% elseif event_in_progress == 'room-free' %}
                     FREE
                 {% endif %}
             </h1>
-            <p>
-                Next event starts in {{ time_until_next_event }}
-            </p>
+            <br>
+            {% if time_remaining %}
+                <p>
+                    {{ time_remaining }} remaining for this event.
+                </p>
+            {% endif %}
+            {% if time_until_next_event %}
+                <p>
+                    Next event starts in {{ time_until_next_event }}.
+                </p>
+            {% endif %}
         </div>
-        <div class="col-md-8">
-            <h2>{{ room_display_name }}</h2>
-
+        <div class="col-sm-8 right-panel">
+            <h1 class="text-center">{{ room_display_name }}</h1>
+            <br>
             <div class="list-group">
                 {% for event in events %}
 
