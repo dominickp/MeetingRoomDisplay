@@ -73,6 +73,18 @@ class CalendarController
 
         // Find the time start of an event
 
+        function getMinutesUntilNextEvent($event)
+        {
+            $first_event_start = $event->getStart()->getDateTime();
+            $first_event_start_datetime = new \DateTime($first_event_start);
+
+            $interval = $first_event_start_datetime->diff(new \DateTime());
+            //print_r($interval); die;
+
+            $minutes_until_next_event =  $interval->format("%i");
+
+            return $minutes_until_next_event;
+        }
         function getTimeUntilNextEvent($event)
         {
             $first_event_start = $event->getStart()->getDateTime();
@@ -135,6 +147,8 @@ class CalendarController
             }
             // Find time remaining
             if(isset($events[0])) $time_remaining = getTimeUntilCurrentEventComplete($events[0]);
+        } else if(isset($events[0]) && getMinutesUntilNextEvent($events[0]) <= 10){
+            $event_in_progress = 'room-soon';
         } else {
             $event_in_progress = 'room-free';
         }

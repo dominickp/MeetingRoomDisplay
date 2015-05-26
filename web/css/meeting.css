@@ -13,6 +13,9 @@ body, html, .container-fluid{
 .room-free .left-panel{
     background-color:rgba(49, 201, 104, 0.5);
 }
+.room-soon .left-panel{
+    background-color:rgba(238, 200, 26, 0.5);
+}
 .room-busy .left-panel{
     background:rgba(215, 40, 40, 0.5);
 }

@@ -1,12 +1,12 @@
-
-
-    <div class="row meeting-room {{ event_in_progress }}">
+<div class="row meeting-room {{ event_in_progress }}">
         <div class="col-sm-4 left-panel text-center">
             <h1 class="room-status text-center">
                 {% if event_in_progress == 'room-busy' %}
                     BUSY
                 {% elseif event_in_progress == 'room-free' %}
                     FREE
+                {% elseif event_in_progress == 'room-soon' %}
+                    SOON
                 {% endif %}
             </h1>
             <br>
@@ -30,7 +30,7 @@
             <div class="list-group">
                 {% for event in events %}
 
-                    <a href="#" class="list-group-item {% if event_in_progress == 'room-busy' and loop.first %}active{% endif %}">
+                    <a href="#" class="list-group-item {% if event_in_progress == 'room-busy' and loop.first %}list-group-item-warning{% endif %}">
                         <h4 class="list-group-item-heading">{{ event.getSummary }}</h4>
                         <p class="list-group-item-text">
                             {% if event.getStart %}{{ event.getStart.getDateTime|date('g:i a') }}{% endif %} -
