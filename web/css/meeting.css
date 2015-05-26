@@ -34,3 +34,10 @@ h1.room-status{
 .meeting-room .list-group-item-heading{
     font-size:28px;
 }
+
+.current-time {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

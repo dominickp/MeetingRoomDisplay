@@ -20,6 +20,9 @@
                     Next event starts in {{ time_until_next_event }}.
                 </p>
             {% endif %}
+            <p class="current-time">
+                {{ "now"|date("l F j, g:i a") }}
+            </p>
         </div>
         <div class="col-sm-8 right-panel">
             <h1 class="text-center">{{ room_display_name }}</h1>
