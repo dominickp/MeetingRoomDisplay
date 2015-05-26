@@ -16,9 +16,9 @@ rooms:
     green-room:
         name: Green Room
         address: [YOUR_CALENDAR_ADDRESS]
-    fish-bowl:
-        name: Fish Bowl
+    client-room:
+        name: Client Room
         address: [etc...]
 ```
 
-You should then be able to point a browser to http://your-host/web/{room_key}. So using the example above, to see the Green Room calendar, we would point to *'http://your-host/web/green-room'*.
+Since this does not use OAuth, you'll need to make sure your resource calendars using this are publically available. You should then be able to point a browser to http://your-host/web/{room_key}. So using the example above, to see the Green Room calendar, we would point to *http://your-host/web/green-room*.
