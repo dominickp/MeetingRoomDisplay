@@ -28,13 +28,13 @@
                 {% for event in events %}
 
                     <a href="#" class="list-group-item {% if event_in_progress == 'room-busy' and loop.first %}active{% endif %}">
-                            <h4 class="list-group-item-heading">{{ event.getSummary }}</h4>
-                            <p class="list-group-item-text">
-                                {% if event.getStart %}{{ event.getStart.getDateTime|date('g:i a') }}{% endif %} -
-                                {% if event.getEnd %}{{ event.getEnd.getDateTime|date('g:i a') }}{% endif %} -
-                                Organizer: {{ event.getOrganizer.getDisplayName }}
-                            </p>
-                        </a>
+                        <h4 class="list-group-item-heading">{{ event.getSummary }}</h4>
+                        <p class="list-group-item-text">
+                            {% if event.getStart %}{{ event.getStart.getDateTime|date('g:i a') }}{% endif %} -
+                            {% if event.getEnd %}{{ event.getEnd.getDateTime|date('g:i a') }}{% endif %} -
+                            Organizer: {{ event.getOrganizer.getDisplayName }}
+                        </p>
+                    </a>
 
                 {% endfor %}
             </div>

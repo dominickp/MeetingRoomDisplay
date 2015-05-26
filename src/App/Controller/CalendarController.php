@@ -140,7 +140,6 @@ class CalendarController
         }
 
 
-
         return $this->twig->render('room_display.twig', array(
             'events' => $events,
             'room_display_name' => $room_display_name,
