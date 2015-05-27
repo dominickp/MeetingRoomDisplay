@@ -132,9 +132,7 @@ class CalendarController
             $next_event = $no_event;
         }
 
-
         $time_remaining = null;
-
 
         // Determine if an event is in progress or not
         if($next_event['first_event_start'] < $now && $next_event['first_event_start'] != null){
@@ -147,7 +145,7 @@ class CalendarController
             }
             // Find time remaining
             if(isset($events[0])) $time_remaining = getTimeUntilCurrentEventComplete($events[0]);
-        } else if(isset($events[0]) && getMinutesUntilNextEvent($events[0]) <= 10){
+        } else if(isset($events[0]) && ( getMinutesUntilNextEvent($events[0]) <= 10 ) ){
             $event_in_progress = 'room-soon';
         } else {
             $event_in_progress = 'room-free';
