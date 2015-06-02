@@ -2,6 +2,14 @@ Meeting Room Display
 ===============
 This project displays event details for a meeting room using Google Calendar. It's built in PHP with Silex and uses Google's Service API. This project was heavily inspired by [google-calendar-display](https://github.com/course-hero/google-calendar-display).
 
+## Examples
+
+
+![Free Room](https://i.imgur.com/DwF3MS7.png "Free Room")
+![Soon Room](https://i.imgur.com/OHb41bf.png "Soon Room")
+![Busy Room](https://i.imgur.com/E8dhIC0.png "Busy Room")
+![Installed](https://i.imgur.com/CEbTMzZ.jpg "Installed")
+
 ## Installation\Usage
 Clone the repo, download Composer to the project directory and run:
 
