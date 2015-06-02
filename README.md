@@ -1,6 +1,6 @@
 Meeting Room Display
 ===============
-This project displays event details for a meeting room using Google Calendar. It's built in PHP with Silex and uses Google's Service API. This project was heavily inspired by [google-calendar-display](https://github.com/course-hero/google-calendar-display).
+This project displays event details for a meeting room using Google Calendar. It's built in PHP with Silex and uses Google's Service API. Every minute, the web page makes an AJAX request to update its content. Using a config file, you can easily set up multiple meeting rooms which have their own HTTP routes. This project was heavily inspired by [google-calendar-display](https://github.com/course-hero/google-calendar-display).
 
 ## Examples
 
