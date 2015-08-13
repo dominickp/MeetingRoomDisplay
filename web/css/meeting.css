@@ -44,3 +44,11 @@ h1.room-status{
     left: 0;
     right: 0;
 }
+
+.ajax-failed{
+    background-color: rgba(30,40,225,0.3);
+    color: white;
+}
+.ajax-failed h1{
+    color: white;
+}
