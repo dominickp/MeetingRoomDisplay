@@ -6,19 +6,61 @@
 {% endblock %}
 
 {% block closing_scripts %}
+
+
+    <script>
+        $( document ).ready(function() {
+            ion.sound({
+                sounds: [
+                    {
+                        name: "another_meeting_warning"
+                    },
+                    {
+                        name: "upcoming_meeting_warning"
+                    }
+                ],
+                volume: 1,
+                path: "sounds/",
+                preload: true
+            });
+
+        });
+
+    </script>
+
 <script>
     $( document ).ready(function() {
 
 
         var ajax_call = function() {
+
+            var current_status = $('#meeting-room-display').attr('data-status');
+
             $.get( "get-room/{{ room_name }}")
                 .done(function( data ) {
                     //alert( "Data Loaded: " + data );
                         $("#ajax-target").removeClass('ajax-failed');
                         $("#ajax-target").html(data);
+
+                        var new_status = $('#meeting-room-display').attr('data-status');
+
+                        console.log('STATE, current: '+current_status+' new: '+new_status);
+
+                        // Alert
+                        if(
+                                (current_status == 'room-busy-soon' && new_status == 'room-busy') ||
+                                (current_status == 'room-busy-soon' && new_status == 'room-soon')
+                        ){
+                            ion.sound.play("another_meeting_warning");
+                            console.log('STATE CHANGE '+current_status+' became '+new_status);
+                        } else if(current_status == 'room-free' && new_status == 'room-soon'){
+                            ion.sound.play("upcoming_meeting_warning");
+                            console.log('STATE CHANGE '+current_status+' became '+new_status);
+                        }
+
                 }).fail(function( data ) {
                         $("#ajax-target").addClass('ajax-failed');
-                        $("#ajax-target").html('<h1 class="text-center">Internet Connection Lost</h1><h3 class="text-center">Plese contact IT Help Desk!</h3>');
+                        $("#ajax-target").html('<h1 class="text-center">Internet Connection Lost</h1><h3 class="text-center">Please contact IT Help Desk!</h3>');
                 });
         };
 
@@ -29,6 +71,10 @@
         ajax_call();
     });
 </script>
+
+
+
+
 
 
 {% endblock %}

@@ -19,6 +19,9 @@ body, html, .container-fluid{
 .room-busy .left-panel{
     background:rgba(215, 40, 40, 0.5);
 }
+.room-busy-soon .left-panel{
+    background:rgba(215, 100, 40, 0.5);
+}
 h1{
     font-size:70px;
 }
