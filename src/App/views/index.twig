@@ -44,7 +44,7 @@
 
                         var new_status = $('#meeting-room-display').attr('data-status');
 
-                        console.log('STATE, current: '+current_status+' new: '+new_status);
+//                        console.log('STATE, current: '+current_status+' new: '+new_status);
 
                         // Alert
                         if(
@@ -52,10 +52,10 @@
                                 (current_status == 'room-busy-soon' && new_status == 'room-soon')
                         ){
                             ion.sound.play("another_meeting_warning");
-                            console.log('STATE CHANGE '+current_status+' became '+new_status);
+//                            console.log('STATE CHANGE '+current_status+' became '+new_status);
                         } else if(current_status == 'room-free' && new_status == 'room-soon'){
                             ion.sound.play("upcoming_meeting_warning");
-                            console.log('STATE CHANGE '+current_status+' became '+new_status);
+//                            console.log('STATE CHANGE '+current_status+' became '+new_status);
                         }
 
                 }).fail(function( data ) {
