@@ -1,0 +1,21 @@
+{
+  "name": "MeetingRoomDisplay",
+  "description": "Google Calendar meeting room displays",
+  "main": "app/app.php",
+  "authors": [
+    "Dominick Peluso <peluso.dominick@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/dominickp/MeetingRoomDisplay",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ion-sound": "ionsound#~3.0.6"
+  }
+}

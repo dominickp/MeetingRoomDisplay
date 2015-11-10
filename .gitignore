@@ -71,3 +71,9 @@ crashlytics-build.properties
 
 
 client_secret.json
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
