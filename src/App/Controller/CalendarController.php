@@ -144,7 +144,16 @@ class CalendarController
                 $next_event = $no_event;
             }
             // Find time remaining
-            if(isset($events[0])) $time_remaining = getTimeUntilCurrentEventComplete($events[0]);
+            if(isset($events[0])){
+                $time_remaining = getTimeUntilCurrentEventComplete($events[0]);
+
+                // Determine if the busy room will be used again soon
+                if(isset($events[1]) && getMinutesUntilNextEvent($events[1]) <= 10){
+                    $event_in_progress = 'room-busy-soon';
+                }
+            }
+
+
         } else if(isset($events[0]) && ( getMinutesUntilNextEvent($events[0]) <= 10 ) ){
             $event_in_progress = 'room-soon';
         } else {
